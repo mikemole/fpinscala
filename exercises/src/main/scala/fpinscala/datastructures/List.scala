@@ -48,11 +48,16 @@ object List { // `List` companion object. Contains functions for creating and wo
   
   def product2(ns: List[Double]) = 
     foldRight(ns, 1.0)(_ * _) // `_ * _` is more concise notation for `(x,y) => x * y`; see sidebar
+    
+  def tail[A](l: List[A]): List[A] = l match {
+    case Nil => throw new UnsupportedOperationException("tail of empty list")
+    case Cons(x,xs) => xs
+  }
 
-
-  def tail[A](l: List[A]): List[A] = sys.error("todo")
-
-  def setHead[A](l: List[A], h: A): List[A] = sys.error("todo")
+  def setHead[A](l: List[A], h: A): List[A] = l match {
+    case Nil => throw new UnsupportedOperationException("setHead of empty list")
+    case Cons(x,xs) => Cons(h, xs)
+  }
 
   def drop[A](l: List[A], n: Int): List[A] = sys.error("todo")
 
