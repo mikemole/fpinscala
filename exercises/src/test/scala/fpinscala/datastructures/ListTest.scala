@@ -34,13 +34,13 @@ class ListTest {
   }
   
   @Test
-  def setHeadOnListOfOne() {
+  def testSetHeadOnListOfOne() {
     val l = List(2)
     assertEquals(List(1), List.setHead(l, 1))
   }
   
   @Test
-  def setHeadOnNilNeg() {
+  def testSetHeadOnNilNeg() {
     control.Exception.ignoring(classOf[UnsupportedOperationException]) {
       List.setHead(Nil, 1)
       fail("Expected UnsupportedOperationException")
@@ -48,8 +48,21 @@ class ListTest {
   }
   
   @Test
-  def setNilHead() {
+  def testSetNilHead() {
     // TODO: Should this throw or succeed?
     assertEquals(List(Nil), List.setHead(List(1), Nil))
+  }
+  
+  @Test
+  def testDrop() {
+    val l = List(1,2,3,4)
+    val d = List.drop(l, 2)
+    assertEquals(List(3,4), d)
+  }
+  
+  @Test
+  def testDropTooMany() {
+    val l = List(1,2)
+    assertEquals(List(), List.drop(l, 3))
   }
 }
