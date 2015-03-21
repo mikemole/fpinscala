@@ -6,6 +6,7 @@ project/boot
 .history
 project.vim
 *.old
+*.cache
 .idea
 .project
 .classpath
