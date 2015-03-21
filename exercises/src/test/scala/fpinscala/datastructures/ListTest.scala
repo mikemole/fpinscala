@@ -65,4 +65,11 @@ class ListTest {
     val l = List(1,2)
     assertEquals(List(), List.drop(l, 3))
   }
+  
+  @Test
+  def testDropWhile() {
+    val l = List(1,2,7,2,5)
+    val dw = List.dropWhile(l, (x: Int) => (x <= 3))
+    assertEquals(List(7,2,5), dw)
+  }
 }

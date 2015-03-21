@@ -66,8 +66,28 @@ object List { // `List` companion object. Contains functions for creating and wo
     case (Cons(_,xs), n) => drop(xs, n-1)
   }
 
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = sys.error("todo")
-
+  /**
+   * Initial implementation drops any elements that don't match
+   * the specified criteria.
+   * I missed the "from the prefix" of the problem description.
+   * @param l
+   * @param f
+   * @return
+   */
+//  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = 
+//    l match {
+//    case Cons(x,xs) => 
+//      if (f(x)) Cons(x, dropWhile(xs, f))
+//      else dropWhile(xs, f)
+//    case _ => l
+//  }
+  
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] =
+    l match {
+    case Cons(h,t) if f(h) => dropWhile(t, f)
+    case _ => l
+  }
+  
   def init[A](l: List[A]): List[A] = sys.error("todo")
 
   def length[A](l: List[A]): Int = sys.error("todo")
