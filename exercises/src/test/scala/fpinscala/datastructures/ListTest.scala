@@ -98,4 +98,22 @@ class ListTest {
     val len = List.foldLeft(l, 0)((acc, _) => acc + 1)
     assertEquals(3, len)
   }
+  
+  @Test
+  def testSum3() {
+    val l = List(1,2,3)
+    assertEquals(6, List.sum3(l))
+  }
+  
+  @Test
+  def testProduct3() {
+    val l = List(1.0, 2.0, 5.0)
+    assertEquals(10.0, List.product3(l), 0)
+  }
+  
+  @Test
+  def testLength3() {
+    val l = List(1,2,3)
+    assertEquals(3, List.length3(l))
+  }
 }

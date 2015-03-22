@@ -125,7 +125,17 @@ object List { // `List` companion object. Contains functions for creating and wo
     l match {
     case Nil => z
     case Cons(h,t) => foldLeft(t, f(z, h))(f)
- }
+  }
+  
+  // Sum in terms of foldLeft
+  def sum3(l: List[Int]): Int = foldLeft(l, 0)(_ + _)
+  
+  // Product in terms of foldLeft
+  def product3(l: List[Double]): Double = foldLeft(l, 1.0)(_ * _)
+  
+  // length in terms of foldLeft
+  def length3[A](l: List[A]): Int = 
+    foldLeft(l, 0)((acc, _) => acc + 1)
 
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }
