@@ -97,6 +97,15 @@ object List { // `List` companion object. Contains functions for creating and wo
     case Cons(_,Nil) => Nil
     case Cons(x,xs) => Cons(x, init(xs))
   }
+  
+  // Exercise 3.7
+  // Q: Can product, using foldRight, immediately halt recursion and return
+  //    0.0?
+  // A: Product cannot halt recursion when a 0.0 is encountered because
+  //    it does not have enough information about the significance of
+  //    0.0 in relation to the passed function, f, during traversal.
+  //    In other words, 0.0 has no intrinsic meaning for the traversal
+  //    which occurs before any functions are applied.
 
   def length[A](l: List[A]): Int = sys.error("todo")
 
