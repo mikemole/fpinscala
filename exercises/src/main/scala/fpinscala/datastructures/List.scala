@@ -111,7 +111,21 @@ object List { // `List` companion object. Contains functions for creating and wo
     foldRight(l, 0)((_,b) => b + 1) // better answer uses acc rather than b
   }
 
-  def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = sys.error("todo")
+  // NOTE: Using @annotation.tailrec is a great way to ensure
+  // a function is tail recursive.
+  // The foldRight above is not tail recursive.  You can see it
+  // because evaluation is started on a stack frame but must
+  // then wait for the next element to be evaluated.
+  // So for foldLeft, we want to avoid this by performing the evaluation
+  // immediately before making the recursive call
+  // (i.e. apply the function f (which can immediately return)
+  // before having to descend into the next call to foldLeft.
+  @annotation.tailrec
+  def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = 
+    l match {
+    case Nil => z
+    case Cons(h,t) => foldLeft(t, f(z, h))(f)
+ }
 
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }

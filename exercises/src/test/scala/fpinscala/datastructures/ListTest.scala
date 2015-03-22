@@ -91,4 +91,11 @@ class ListTest {
   def testLengthViaFoldRight() {
     assertEquals(3, List.length(List(1,4,9)))
   }
+  
+  @Test
+  def testLengthViaFoldLeft() {
+    val l = List(1,2,3)
+    val len = List.foldLeft(l, 0)((acc, _) => acc + 1)
+    assertEquals(3, len)
+  }
 }
