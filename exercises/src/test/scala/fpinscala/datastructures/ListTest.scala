@@ -86,4 +86,9 @@ class ListTest {
     val expected = List()
     assertEquals(expected, List.init(l))
   }
+  
+  @Test
+  def testLengthViaFoldRight() {
+    assertEquals(3, List.length(List(1,4,9)))
+  }
 }
