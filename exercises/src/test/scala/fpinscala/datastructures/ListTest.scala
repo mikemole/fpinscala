@@ -116,4 +116,11 @@ class ListTest {
     val l = List(1,2,3)
     assertEquals(3, List.length3(l))
   }
+  
+  @Test
+  def testReverse() {
+    val l = List(1,2,3)
+    val r = List(3,2,1)
+    assertEquals(r, List.reverse(l))
+  }
 }
