@@ -72,4 +72,18 @@ class ListTest {
     val dw = List.dropWhile(l, (x: Int) => (x <= 3))
     assertEquals(List(7,2,5), dw)
   }
+  
+  @Test
+  def testInit() {
+    val l = List(1,2,3,4)
+    val expected = List(1,2,3)
+    assertEquals(expected, List.init(l))
+  }
+  
+  @Test
+  def testInitListOfOne() {
+    val l = List(1)
+    val expected = List()
+    assertEquals(expected, List.init(l))
+  }
 }
