@@ -146,6 +146,11 @@ object List { // `List` companion object. Contains functions for creating and wo
     
   // foldRight in terms of foldLeft
   def foldRight2[A,B](l: List[A], z: B)(f: (A, B) => B): B = ???
+  
+  // Concatenate a list of lists into a single list
+  def concat[A](l: List[List[A]]): List[A] = 
+    // foldLeft(l, Nil:List[A])(append(_, _))
+    foldRight(l, Nil:List[A])(append)
 
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 }

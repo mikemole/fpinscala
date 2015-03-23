@@ -123,4 +123,16 @@ class ListTest {
     val r = List(3,2,1)
     assertEquals(r, List.reverse(l))
   }
+  
+  @Test
+  def testConcatListOfLists() {
+    val l1 = List(1,2,3)
+    val l2 = List(4,5,6)
+    val l3 = List(7,8,9)
+    val lol = List(l1, l2, l3)
+    
+    val expected = List(1,2,3,4,5,6,7,8,9)
+    val cl = List.concat(lol)
+    assertEquals(expected, cl)
+  }
 }
