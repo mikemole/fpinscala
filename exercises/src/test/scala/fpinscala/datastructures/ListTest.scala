@@ -125,6 +125,14 @@ class ListTest {
   }
   
   @Test
+  def testAppendInTermsOfFold() {
+    val a1 = List(1,2)
+    val a2 = List(3,4)
+    val l = List.append2(a1, a2)
+    assertEquals(List(1,2,3,4), l)
+  }
+  
+  @Test
   def testConcatListOfLists() {
     val l1 = List(1,2,3)
     val l2 = List(4,5,6)

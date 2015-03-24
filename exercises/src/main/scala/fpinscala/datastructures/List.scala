@@ -146,8 +146,26 @@ object List { // `List` companion object. Contains functions for creating and wo
     
   // foldRight in terms of foldLeft
   def foldRight2[A,B](l: List[A], z: B)(f: (A, B) => B): B = ???
+
+  // Append in terms of foldLeft or foldRight
+  // The (a1, a2) part was apparent here, but the confusing part
+  // for me was how the Cons(_, _) handles the transition from
+  // a1 to a2.  I think the answer is that it doesn't. 
+  // The process ends when the a2 Nil condition is reached.
+  def append2[A](a1: List[A], a2: List[A]): List[A] =
+    foldRight(a1, a2)(Cons(_, _))
   
   // Concatenate a list of lists into a single list
+  // You might be asking yourself "why foldRight instad of foldLeft?"
+  // The answer is that question asked for linear runtime with respect
+  // to the total length of all lists.  If you use a fold left, 
+  // it will start with a list, then traverse it to append to the end,
+  // then traverse the longer list to append to the end, and so on.
+  // If, however, you fold right, then you start with a list, then traverse
+  // only the next list to append it to the end, then traverse only the next
+  // list, and so on.
+  // So another way of thinking about it is whether you traverse the list
+  // that 
   def concat[A](l: List[List[A]]): List[A] = 
     // foldLeft(l, Nil:List[A])(append(_, _))
     foldRight(l, Nil:List[A])(append)
