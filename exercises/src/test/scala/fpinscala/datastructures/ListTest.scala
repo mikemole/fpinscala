@@ -164,4 +164,12 @@ class ListTest {
     val ls = List("1.0","2.7","3.0")
     assertEquals(ls, List.map(ld)(d => d.toString()))
   }
+  
+  @Test
+  def testFilter() {
+    val l = List(1,2,3,4,7,8,10)
+    val expected = List(2,4,8,10)
+    val filtered = List.filter(l)(x => x % 2 == 0)
+    assertEquals(expected, filtered)
+  }
 }

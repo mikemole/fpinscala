@@ -181,6 +181,13 @@ object List { // `List` companion object. Contains functions for creating and wo
   def doublesToStrings(l: List[Double]): List[String] =
     foldRight(l, Nil:List[String])((x,xs) => Cons(x.toString(), xs))
 
+  // 3.18
   def map[A,B](l: List[A])(f: A => B): List[B] = 
     foldRight(l, Nil:List[B])((x,xs) => Cons(f(x), xs))
+    
+  // 3.19
+  def filter[A](as: List[A])(f: A => Boolean): List[A] = 
+    foldRight(as, Nil:List[A])((x, xs) => if (f(x)) Cons(x, xs) else xs)
+
+
 }
