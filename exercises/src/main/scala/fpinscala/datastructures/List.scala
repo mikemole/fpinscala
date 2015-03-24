@@ -222,4 +222,22 @@ object List { // `List` companion object. Contains functions for creating and wo
     case (_,Nil) => Nil
     case (Cons(h1,t1), Cons(h2,t2)) => Cons(f(h1,h2), zipWith(t1,t2)(f))
   }
+  
+  // 3.24
+  def startsWith[A](sup: List[A], sub: List[A]): Boolean = 
+    (sup,sub) match {
+    case (_,Nil) => true
+    case (Cons(h1,t1), Cons(h2,t2)) => h1 == h2 && startsWith(t1,t2)
+    case _ => false
+  }
+  // Question about their implementation... Are you allowed to use an if
+  // without an else in the case statement?
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = 
+    (sup,sub) match {
+    case (_,Nil) => false
+    case (Nil,_) => false
+    case (Cons(x,xs),_) => startsWith(Cons(x,xs), sub) || hasSubsequence(xs, sub)
+  }
+    
+  
 }

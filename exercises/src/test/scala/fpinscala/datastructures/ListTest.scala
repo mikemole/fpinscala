@@ -205,4 +205,19 @@ class ListTest {
     val expected = List(5,7,9)
     val actual = List.zipWith(l1, l2)(_ + _)
   }
+  
+  // 3.24
+  @Test
+  def testHasSubsequence() {
+    val l = List(1,4,5,6,10,9)
+    val ss = List(4,5,6)
+    assertTrue(List.hasSubsequence(l, ss))
+  }
+  
+  @Test
+  def testHasSubsequenceNeg() {
+    val l = List(1,4,5,6,10,9)
+    val ss = List(4,5,7)
+    assertFalse(List.hasSubsequence(l, ss))
+  }
 }
