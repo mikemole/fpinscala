@@ -196,4 +196,13 @@ class ListTest {
     val expected = List(5,7,9)
     assertEquals(expected, List.zipWithAddition(l1, l2))
   }
+  
+  // 3.23
+  @Test
+  def testZipWith() {
+    val l1 = List(1,2,3)
+    val l2 = List(4,5,6)
+    val expected = List(5,7,9)
+    val actual = List.zipWith(l1, l2)(_ + _)
+  }
 }

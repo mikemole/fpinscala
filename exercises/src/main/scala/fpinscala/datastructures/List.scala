@@ -202,11 +202,24 @@ object List { // `List` companion object. Contains functions for creating and wo
   // On this one, I was confused at first thinking that it should be implemented
   // in terms of flatMap, foldRight, etc., but then went with
   // what seemed more obvious, using match.
+  // The other incorrect assumption I made was to assume that Nil should be treated
+  // as a 0 in the addition operation and in turn still use the element
+  // from the other list.  
   def zipWithAddition(a1: List[Int], a2: List[Int]): List[Int] =
     (a1, a2) match {
-    case (Nil,_) => a2
-    case (_,Nil) => a1
+    case (Nil,_) => Nil
+    case (_,Nil) => Nil
     case (Cons(h1,t1),Cons(h2,t2)) => Cons(h1 + h2, zipWithAddition(t1, t2))
   }
     
+  // 3.23
+  // I initially implemented it using just type A, which worked for my test,
+  // but afterwards saw that it could be more general by not restricting
+  // the input and output lists to the same type.
+  def zipWith[A,B,C](a: List[A], b: List[B])(f: (A,B) => C): List[C] = 
+    (a,b) match {
+    case (Nil,_) => Nil
+    case (_,Nil) => Nil
+    case (Cons(h1,t1), Cons(h2,t2)) => Cons(f(h1,h2), zipWith(t1,t2)(f))
+  }
 }
