@@ -187,4 +187,13 @@ class ListTest {
     val filtered = List.filter2(l)(x => x % 2 == 0)
     assertEquals(expected, filtered)
   }
+  
+  // 3.22
+  @Test
+  def testZipWithAddition() {
+    val l1 = List(1,2,3)
+    val l2 = List(4,5,6)
+    val expected = List(5,7,9)
+    assertEquals(expected, List.zipWithAddition(l1, l2))
+  }
 }

@@ -196,6 +196,17 @@ object List { // `List` companion object. Contains functions for creating and wo
   // 3.21
   def filter2[A](as: List[A])(f: A => Boolean): List[A] =
     // Note the better answer uses a instead of x
-    flatMap(as)((x) => if (f(x)) List(x) else Nil) 
+    flatMap(as)((x) => if (f(x)) List(x) else Nil)
+    
+  // 3.22
+  // On this one, I was confused at first thinking that it should be implemented
+  // in terms of flatMap, foldRight, etc., but then went with
+  // what seemed more obvious, using match.
+  def zipWithAddition(a1: List[Int], a2: List[Int]): List[Int] =
+    (a1, a2) match {
+    case (Nil,_) => a2
+    case (_,Nil) => a1
+    case (Cons(h1,t1),Cons(h2,t2)) => Cons(h1 + h2, zipWithAddition(t1, t2))
+  }
     
 }
