@@ -169,6 +169,18 @@ object List { // `List` companion object. Contains functions for creating and wo
   def concat[A](l: List[List[A]]): List[A] = 
     // foldLeft(l, Nil:List[A])(append(_, _))
     foldRight(l, Nil:List[A])(append)
+    
+  // Exercise 3.16
+  // Add 1 to each item in list
+  def plusOne(l: List[Int]): List[Int] = 
+    foldRight(l, Nil:List[Int])((x,xs) => Cons(x + 1, xs))
+    
+  // Exercise 3.17
+  // Convert a list of doubles to their string
+  // equivalents
+  def doublesToStrings(l: List[Double]): List[String] =
+    foldRight(l, Nil:List[String])((x,xs) => Cons(x.toString(), xs))
 
-  def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
+  def map[A,B](l: List[A])(f: A => B): List[B] = 
+    foldRight(l, Nil:List[B])((x,xs) => Cons(f(x), xs))
 }

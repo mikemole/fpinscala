@@ -143,4 +143,25 @@ class ListTest {
     val cl = List.concat(lol)
     assertEquals(expected, cl)
   }
+  
+  @Test
+  def testPlusOne() {
+    val l1 = List(4,6,8)
+    val expected = List(5,7,9)
+    assertEquals(expected, List.plusOne(l1))
+  }
+  
+  @Test
+  def testListDoublesToStrings() {
+    val ld = List(1.0, 2.7, 3.0)
+    val ls = List("1.0","2.7","3.0")
+    assertEquals(ls, List.doublesToStrings(ld))
+  }
+  
+  @Test
+  def testMap() {
+    val ld = List(1.0, 2.7, 3.0)
+    val ls = List("1.0","2.7","3.0")
+    assertEquals(ls, List.map(ld)(d => d.toString()))
+  }
 }
