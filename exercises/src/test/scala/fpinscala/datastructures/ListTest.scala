@@ -172,4 +172,11 @@ class ListTest {
     val filtered = List.filter(l)(x => x % 2 == 0)
     assertEquals(expected, filtered)
   }
+  
+  @Test
+  def testFlatMap() {
+    val expected = List(1,1,2,2,3,3)
+    val l = List.flatMap(List(1,2,3))(i => List(i,i))
+    assertEquals(expected, l)
+  }
 }
