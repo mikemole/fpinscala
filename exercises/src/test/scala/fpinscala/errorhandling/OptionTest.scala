@@ -68,4 +68,10 @@ class OptionTest {
   def testFilterToNone() {
     assertEquals(None, Some(2).filter(x => x == 3))
   }
+  
+  @Test
+  def testVariance() {
+    val xs = Seq(1.0, 2.0, 3.0, 4.0)
+    assertEquals(Some(1.25), Option.variance(xs))
+  }
 }
