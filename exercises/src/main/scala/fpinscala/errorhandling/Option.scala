@@ -4,16 +4,39 @@ package fpinscala.errorhandling
 import scala.{Option => _, Some => _, Either => _, _} // hide std library `Option`, `Some` and `Either`, since we are writing our own in this chapter
 
 sealed trait Option[+A] {
-  def map[B](f: A => B): Option[B] = sys.error("todo")
+  def map[B](f: A => B): Option[B] = this match {
+    case None => None
+    case Some(a) => Some(f(a))
+  }
 
-  def getOrElse[B>:A](default: => B): B = sys.error("todo")
+  def getOrElse[B>:A](default: => B): B = this match {
+    case None => default
+    case Some(a) => a
+  }
 
-  def flatMap[B](f: A => Option[B]): Option[B] = sys.error("todo")
+  def flatMap[B](f: A => Option[B]): Option[B] =
+    map(f) getOrElse None
 
-  def orElse[B>:A](ob: => Option[B]): Option[B] = sys.error("todo")
-
-  def filter(f: A => Boolean): Option[A] = sys.error("todo")
+  def orElse[B>:A](ob: => Option[B]): Option[B] =
+  //  if (this != None) this else ob
+    map(Some(_)) getOrElse ob
+    
+  def filter(f: A => Boolean): Option[A] = this match {
+    case Some(a) => if (f(a)) this else None
+    case None => None
+  }
+  def filter2(f: A => Boolean): Option[A] = this match {
+    case Some(a) if (f(a)) => this
+    case None => None
+  }
+  def filter3(f: A => Boolean): Option[A] = 
+    flatMap(a => if (f(a)) Some(a) else None)
 }
+
+// General thoughts: It's often much easier at this point
+// to implement functions using pattern matching rather
+// than in terms of other functions.
+
 case class Some[+A](get: A) extends Option[A]
 case object None extends Option[Nothing]
 
