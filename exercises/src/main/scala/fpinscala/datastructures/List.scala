@@ -146,8 +146,7 @@ object List { // `List` companion object. Contains functions for creating and wo
     foldLeft(reverse(l), z)((b,a) => f(a, b))  
     
   // foldLeft in terms of foldRight
-  def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B, A) => B): B = 
-    foldRight(l, z)((x,xs) => f(xs,x))
+  def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B, A) => B): B = ???
 
   // Append in terms of foldLeft or foldRight
   // The (a1, a2) part was apparent here, but the confusing part
