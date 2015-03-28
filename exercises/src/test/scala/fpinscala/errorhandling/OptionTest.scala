@@ -98,4 +98,18 @@ class OptionTest {
     val ex = Option.map2(a, b)((a,b) => a + b)
     assertEquals(None, ex)
   }
+  
+  @Test
+  def testSequence() {
+    val a = List(Some(1), Some(2), Some(3))
+    val ex = List(1,2,3)
+    assertEquals(ex, Option.sequence(a))
+  }
+  
+  @Test
+  def testSequenceNeg() {
+    val a = List(Some(1), None, Some(3))
+    val ex = None
+    assertEquals(ex, a)
+  }
 }

@@ -96,7 +96,24 @@ object Option {
   def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
     a flatMap (aa => b map (bb => f(aa, bb)))
 
-  def sequence[A](a: List[Option[A]]): Option[List[A]] = sys.error("todo")
+  // Combine a list of Options into one Option containing a list
+  // of all the Some values in the original list.  If the original
+  // list contains None even once, the result of the function
+  // should be None; otherwise the result should be Some
+  // with a list of all the values
+  def sequence[A](a: List[Option[A]]): Option[List[A]] = 
+    a match {
+    case Nil => Some(Nil)
+    // WTF??  Kind of makes sense if you code it backwards... grumble
+    case h :: t => h flatMap (hh => sequence(t) map (hh :: _))
+  }
+  
+  // The version using foldRight pissed me off so much.
+  // How the hell can you remember to provide the type annotation
+  // so that the goddamn scala compiler can overcome its shortcomings
+  def sequence_1[A](a: List[Option[A]]): Option[List[A]] =
+    a.foldRight[Option[List[A]]](Some(Nil))((x,y) => map2(x,y)(_ :: _))
+
 
   def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = sys.error("todo")
 }
