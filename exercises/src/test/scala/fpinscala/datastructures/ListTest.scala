@@ -125,6 +125,13 @@ class ListTest {
   }
   
   @Test
+  def testFoldRightViaFoldLeft() {
+    val l = List(1,2,3)
+    val out = List.foldRightViafoldLeft(l, Nil:List[Int])(Cons(_, _))
+    assertEquals(l, out)
+  }
+  
+  @Test
   def testAppendInTermsOfFold() {
     val a1 = List(1,2)
     val a2 = List(3,4)

@@ -141,11 +141,13 @@ object List { // `List` companion object. Contains functions for creating and wo
   def reverse[A](l: List[A]): List[A] = 
     foldLeft(l, Nil:List[A])((xs, x) => Cons(x, xs))
     
-  // foldLeft in terms of foldRight
-  def foldLeft2[A,B](l: List[A], z: B)(f: (B, A) => B): B = ???
-    
   // foldRight in terms of foldLeft
-  def foldRight2[A,B](l: List[A], z: B)(f: (A, B) => B): B = ???
+  def foldRightViafoldLeft[A,B](l: List[A], z: B)(f: (A, B) => B): B = 
+    foldLeft(reverse(l), z)((b,a) => f(a, b))  
+    
+  // foldLeft in terms of foldRight
+  def foldLeftViaFoldRight[A,B](l: List[A], z: B)(f: (B, A) => B): B = 
+    foldRight(l, z)((x,xs) => f(xs,x))
 
   // Append in terms of foldLeft or foldRight
   // The (a1, a2) part was apparent here, but the confusing part
