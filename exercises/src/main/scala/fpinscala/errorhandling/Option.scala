@@ -71,7 +71,30 @@ object Option {
     mean(xs) flatMap (m => mean(xs map(x => math.pow(x - m, 2))))
   }
 
-  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = sys.error("todo")
+  // I continue to see pattern matching as the easy way out...
+  def map2_1[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+    (a,b) match {
+    case (None,_) => None
+    case (_,None) => None
+    case (Some(a),Some(b)) => Some(f(a, b))
+  }
+    
+  def map2_2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+    a flatMap (aa => b flatMap (bb => Some(f(aa, bb))))
+  
+  // While I'm in the moment.  Let me gather my thoughts about the difference
+  // between map2 and map2_2 because it's all so clear now...
+  // The big question is why did I think I had to wrap f in a Some() in
+  // map2_2.  I thought, if I "flatten" it out, then I end up with a C
+  // (i.e. the result of f(A,B) and need to return an Option[C], so
+  // I wrapped it in a Some, which at that point is adding a little
+  // unnecessary overhead because I've guaranteed that at that point
+  // I'll have a C.
+  // In map2, though, I can rely on "map" to deal with the logic of
+  // applying my function, f, to the value in the B and wrapping it
+  // in an Option, thus eliminating the need to unwrap it and re-wrap it.
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+    a flatMap (aa => b map (bb => f(aa, bb)))
 
   def sequence[A](a: List[Option[A]]): Option[List[A]] = sys.error("todo")
 

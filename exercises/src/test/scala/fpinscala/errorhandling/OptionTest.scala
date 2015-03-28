@@ -74,4 +74,28 @@ class OptionTest {
     val xs = Seq(1.0, 2.0, 3.0, 4.0)
     assertEquals(Some(1.25), Option.variance(xs))
   }
+  
+  @Test
+  def testMap2() {
+    val a = Some(1)
+    val b = Some(2)
+    val ex = Option.map2(a, b)((a,b) => a + b)
+    assertEquals(Some(3), ex)
+  }
+  
+  @Test
+  def testMap2Neg01() {
+    val a = Some(1)
+    val b = None:Option[Int]
+    val ex = Option.map2(a, b)((a,b) => a + b)
+    assertEquals(None, ex)
+  }
+  
+  @Test
+  def testMap2Neg02() {
+    val a = None:Option[Int]
+    val b = Some(1)
+    val ex = Option.map2(a, b)((a,b) => a + b)
+    assertEquals(None, ex)
+  }
 }
