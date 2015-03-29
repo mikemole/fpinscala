@@ -102,14 +102,14 @@ class OptionTest {
   @Test
   def testSequence() {
     val a = List(Some(1), Some(2), Some(3))
-    val ex = List(1,2,3)
+    val ex = Some(List(1,2,3))
     assertEquals(ex, Option.sequence(a))
   }
   
   @Test
-  def testSequenceNeg() {
-    val a = List(Some(1), None, Some(3))
-    val ex = None
-    assertEquals(ex, a)
+  def testTraverse() {
+    val a = List("1","2","3")
+    val ex = Some(List(1,2,3))
+    assertEquals(ex, Option.traverse(a)(i => Option.Try(i.toInt)))
   }
 }

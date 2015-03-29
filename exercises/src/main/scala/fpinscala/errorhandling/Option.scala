@@ -114,6 +114,13 @@ object Option {
   def sequence_1[A](a: List[Option[A]]): Option[List[A]] =
     a.foldRight[Option[List[A]]](Some(Nil))((x,y) => map2(x,y)(_ :: _))
 
+  def Try[A](a: => A): Option[A] = 
+    try Some(a)
+    catch { case e: Exception => None }
 
-  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = sys.error("todo")
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = 
+    a.foldRight[Option[List[B]]](Some(Nil))((x,xs) => map2(f(x),xs)(_ :: _))
+    
+  def sequenceViaTraverse[A](a: List[Option[A]]): Option[List[A]] =
+    traverse(a)(x => x)
 }
