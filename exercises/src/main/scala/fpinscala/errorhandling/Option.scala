@@ -108,9 +108,7 @@ object Option {
     case h :: t => h flatMap (hh => sequence(t) map (hh :: _))
   }
   
-  // The version using foldRight pissed me off so much.
-  // How the hell can you remember to provide the type annotation
-  // so that the goddamn scala compiler can overcome its shortcomings
+  // The version using foldRight was annoying...
   def sequence_1[A](a: List[Option[A]]): Option[List[A]] =
     a.foldRight[Option[List[A]]](Some(Nil))((x,y) => map2(x,y)(_ :: _))
 

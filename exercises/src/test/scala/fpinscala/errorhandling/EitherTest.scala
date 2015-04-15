@@ -21,4 +21,18 @@ class EitherTest {
     assertEquals(expected, r.map { x => x + " right" })
   }
   
+  @Test
+  def testTraverse() {
+    val a = List("1","2","3")
+    val ex = Right(List(1,2,3))
+    assertEquals(ex, Either.traverse(a)(i => Either.Try(i.toInt)))
+  }
+  
+  @Test
+  def testSequence() {
+    val a = List(Right(1), Right(2), Right(3))
+    val ex = Right(List(1,2,3))
+    assertEquals(ex, Either.sequence(a))
+  }
+  
 }
