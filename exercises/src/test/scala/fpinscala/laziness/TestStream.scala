@@ -65,4 +65,32 @@ class TestStream {
   def testHeadOptionEmpty() {
     assertEquals(None, Empty.headOption)
   }
+  
+  @Test
+  def testMap() {
+    val s = Stream(1, 2, 3)
+    val ex = Stream(2, 4, 6)
+    assertEquals(ex.toList, s.map(x => x * 2).toList)
+  }
+  
+  @Test
+  def testFilter() {
+    val s = Stream(1, 2, 3)
+    val ex = Stream(2)
+    assertEquals(ex.toList, s.filter(x => x % 2 == 0).toList)
+  }
+  
+  @Test
+  def testAppend() {
+    val s = Stream(1, 2) append Stream(3, 4)
+    val ex = Stream(1, 2, 3, 4)
+    assertEquals(ex.toList, s.toList)
+  }
+  
+  @Test
+  def testFlatMap() {
+    val s = Stream(Stream(1,2), Stream(3,4))
+    val ex = Stream(2,4,6,8)
+    assertEquals(ex.toList, s.flatMap(x => x.map(_ * 2)).toList)
+  }
 }
