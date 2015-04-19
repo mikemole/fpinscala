@@ -53,4 +53,16 @@ class TestStream {
     val ex = Stream(1, 2).toList
     assertEquals(ex, s.takeWhileViaFoldRight(x => x < 3).toList)
   }
+  
+  @Test
+  def testHeadOptionNonEmpty() {
+    val s = Stream.cons(1, Stream.cons(2, Stream.cons(3, Empty)))
+    val ho = s.headOption
+    assertEquals(1, ho.get)
+  }
+  
+  @Test
+  def testHeadOptionEmpty() {
+    assertEquals(None, Empty.headOption)
+  }
 }
