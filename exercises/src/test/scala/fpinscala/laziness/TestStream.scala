@@ -93,4 +93,11 @@ class TestStream {
     val ex = Stream(2,4,6,8)
     assertEquals(ex.toList, s.flatMap(x => x.map(_ * 2)).toList)
   }
+  
+  @Test
+  def testConstant() {
+    val ex = List("b", "b", "b")
+    val bs = Stream.constant("b": String)
+    assertEquals(ex, bs.take(3).toList)
+  }
 }
