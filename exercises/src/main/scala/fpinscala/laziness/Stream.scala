@@ -39,6 +39,12 @@ trait Stream[+A] {
     case Cons(h, t) if p(h()) => cons(h(), t() takeWhile p)
     case _ => Empty
   }
+  
+  // Q: I'm having trouble figuring out when the compiler
+  // doesn't have enough information for type inference
+  // vs. a problem with my code.  Tips?
+  def takeWhileViaFoldRight(p: A => Boolean): Stream[A] =
+    foldRight(empty[A])((h,t) => if (p(h)) cons(h,t) else Empty)
 
   def forAll(p: A => Boolean): Boolean =
     foldRight(true)((h,t) => p(h) && t)

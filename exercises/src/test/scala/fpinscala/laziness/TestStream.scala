@@ -46,4 +46,11 @@ class TestStream {
     val s = Stream.cons(1, Stream.cons(2, Stream.cons(3, Empty)))
     assertFalse(s.forAll { x => x < 3 })
   }
+  
+  @Test
+  def testTakeWhileViaFoldRight() {
+    val s = Stream.cons(1, Stream.cons(2, Stream.cons(3, Empty)))
+    val ex = Stream(1, 2).toList
+    assertEquals(ex, s.takeWhileViaFoldRight(x => x < 3).toList)
+  }
 }
