@@ -107,4 +107,10 @@ class TestStream {
     val v = Stream.from(3).take(4).toList
     assertEquals(ex, v)
   }
+  
+  @Test
+  def testFibs() {
+    val ex = List(0,1,1,2,3,5,8)
+    val v = Stream.fibs.take(7).toList
+  }
 }
