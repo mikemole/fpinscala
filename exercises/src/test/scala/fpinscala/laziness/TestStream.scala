@@ -100,4 +100,11 @@ class TestStream {
     val bs = Stream.constant("b": String)
     assertEquals(ex, bs.take(3).toList)
   }
+  
+  @Test
+  def testFrom() {
+    val ex = List(3,4,5,6)
+    val v = Stream.from(3).take(4).toList
+    assertEquals(ex, v)
+  }
 }
