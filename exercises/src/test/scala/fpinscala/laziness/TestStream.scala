@@ -112,6 +112,7 @@ class TestStream {
   def testFibs() {
     val ex = List(0,1,1,2,3,5,8)
     val v = Stream.fibs.take(7).toList
+    assertEquals(ex, v)
   }
   
   @Test
@@ -120,4 +121,33 @@ class TestStream {
     val ex = List(1, 1, 1)
     assertEquals(ex, ones.take(3).toList)
   }
+  
+  @Test
+  def testOnesViaUnfold() {
+    val ex = List(1, 1, 1)
+    val v = Stream.onesViaUnfold.take(3).toList
+    assertEquals(ex, v)
+  }
+  
+  @Test
+  def testFromViaUnfold() {
+    val ex = List(3,4,5,6)
+    val v = Stream.fromViaUnfold(3).take(4).toList
+    assertEquals(ex, v)
+  }
+  
+  @Test
+  def testConstantViaUnfold() {
+    val ex = List("b", "b", "b")
+    val bs = Stream.constantViaUnfold("b": String)
+    assertEquals(ex, bs.take(3).toList)
+  }
+  
+  @Test
+  def testFibsViaUnfold() {
+    val ex = List(0,1,1,2,3,5,8)
+    val v = Stream.fibsViaUnfold.take(7).toList
+    assertEquals(ex, v)
+  }
+  
 }
