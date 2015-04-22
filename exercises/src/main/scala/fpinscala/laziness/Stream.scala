@@ -99,5 +99,9 @@ object Stream {
     fibsInt(0, 1)
   }
 
-  def unfold[A, S](z: S)(f: S => Option[(A, S)]): Stream[A] = sys.error("todo")
+  def unfold[A, S](z: S)(f: S => Option[(A, S)]): Stream[A] = 
+    f(z) match {
+    case Some((h,s)) => cons(h, unfold(s)(f))
+    case _ => Empty
+  }
 }

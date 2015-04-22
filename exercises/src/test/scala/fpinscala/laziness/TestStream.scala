@@ -113,4 +113,11 @@ class TestStream {
     val ex = List(0,1,1,2,3,5,8)
     val v = Stream.fibs.take(7).toList
   }
+  
+  @Test
+  def testUnfold() {
+    val ones = Stream.unfold(Stream.empty[Int])(s => Some(1, s))
+    val ex = List(1, 1, 1)
+    assertEquals(ex, ones.take(3).toList)
+  }
 }
