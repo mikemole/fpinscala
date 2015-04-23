@@ -150,4 +150,34 @@ class TestStream {
     assertEquals(ex, v)
   }
   
+  @Test
+  def testMapViaUnfold() {
+    val s = Stream(1, 2, 3)
+    val ex = Stream(2, 4, 6)
+    assertEquals(ex.toList, s.mapViaUnfold(x => x * 2).toList)
+  }
+  
+  @Test
+  def testTakeViaUnfold() {
+    val s = Stream.cons(1, Stream.cons(2, Stream.cons(3, Empty)))
+    val ex = Stream(1, 2).toList
+    assertEquals(ex, s.takeViaUnfold(2).toList)
+  }
+  
+  @Test
+  def testTakeWhileViaUnfold() {
+    val s = Stream(1,2,3)
+    val ex = Stream(1,2).toList
+    assertEquals(ex, s.takeWhileViaUnfold(x => x < 3).toList)
+  }
+  
+  @Test
+  def testZipWith() {
+    val s1 = Stream(1,2,3)
+    val s2 = Stream(4,5,6)
+    val expected = List(5,7,9)
+    val actual = s1.zipWith(s2)(_ + _).toList
+    assertEquals(expected, actual)
+  }
+  
 }
