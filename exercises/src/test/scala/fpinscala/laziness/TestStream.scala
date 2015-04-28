@@ -201,4 +201,16 @@ class TestStream {
     assertFalse(s2 startsWith s1)
   }
 
+  @Test
+  def testTailsViaUnfold() {
+    val s = Stream(1,2,3)
+    val ex = Stream(
+        Stream(1,2,3).toList, 
+        Stream(2,3).toList, 
+        Stream(3).toList, 
+        Stream().toList)
+        .toList
+    val tails = s.tails
+    assertEquals(ex, tails.map { x => x.toList } toList)
+  }
 }
