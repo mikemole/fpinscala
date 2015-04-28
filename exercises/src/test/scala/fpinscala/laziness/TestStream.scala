@@ -180,4 +180,25 @@ class TestStream {
     assertEquals(expected, actual)
   }
   
+  @Test
+  def testStartsWith() {
+    val s1 = Stream(1,2,3)
+    val s2 = Stream(1,2)
+    assertTrue(s1 startsWith s2)
+  }
+  
+  @Test
+  def testStartsWithNeg() {
+    val s1 = Stream(1,2,3)
+    val s2 = Stream(1,3)
+    assertFalse(s1 startsWith s2)
+  }
+  
+  @Test
+  def testStartsWithNeg02() {
+    val s1 = Stream(1,2,3)
+    val s2 = Stream(1,2)
+    assertFalse(s2 startsWith s1)
+  }
+
 }
