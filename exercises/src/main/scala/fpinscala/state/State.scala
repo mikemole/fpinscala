@@ -30,7 +30,13 @@ object RNG {
       (f(a), rng2)
     }
 
-  def nonNegativeInt(rng: RNG): (Int, RNG) = ???
+  // Question... Isn't the book's answer increasing the probability of 0?
+  def nonNegativeInt(rng: RNG): (Int, RNG) = {
+    val (i, r) = rng.nextInt
+    if (i >= 0) (i, r) 
+    else if (i == Int.MinValue) nonNegativeInt(r)
+    else (0 - i, r)
+  }
 
   def double(rng: RNG): (Double, RNG) = ???
 
