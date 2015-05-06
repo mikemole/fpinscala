@@ -19,4 +19,12 @@ class TestState {
     val dbl = RNG.double(rng)._1
     assertTrue(dbl >=0 && dbl < 1)
   }
+  
+  @Test
+  def testInts() {
+    val rng = RNG.Simple(0)
+    val ints = RNG.ints(3)(rng)._1
+    val ex = List(0, 4232237, 178803790)
+    assertEquals(ex, ints)
+  }
 }
