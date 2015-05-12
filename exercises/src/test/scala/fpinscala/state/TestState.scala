@@ -27,4 +27,11 @@ class TestState {
     val ex = List(0, 4232237, 178803790)
     assertEquals(ex, ints)
   }
+  
+  @Test
+  def testDoubleViaMap() {
+    val rng = RNG.Simple(0)
+    val dbl = RNG.doubleViaMap(rng)._1
+    assertTrue(dbl >= 0 && dbl < 1)
+  }
 }
