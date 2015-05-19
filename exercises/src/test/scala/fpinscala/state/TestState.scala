@@ -34,4 +34,12 @@ class TestState {
     val dbl = RNG.doubleViaMap(rng)._1
     assertTrue(dbl >= 0 && dbl < 1)
   }
+  
+  @Test
+  def testIntsViaSequence() {
+    val rng = RNG.Simple(0)
+    val ints = RNG.intsViaSequence(3)
+    val ex = List(0, 4232237, 178803790)
+    assertEquals(ex, ints)
+  }
 }

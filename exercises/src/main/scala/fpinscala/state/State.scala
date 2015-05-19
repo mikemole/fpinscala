@@ -82,7 +82,14 @@ object RNG {
       (f(a,b), rng3)
     }
 
-  def sequence[A](fs: List[Rand[A]]): Rand[List[A]] = ???
+  def sequence[A](fs: List[Rand[A]]): Rand[List[A]] = 
+    fs.foldRight(unit(List[A]()))((h,t) => map2(h, t)(_::_))
+    
+  // I'm a little thrown off by the signature change...
+  // which didn't actually change and seems to be necessary
+  // to utilize List.fill, but still...
+  def intsViaSequence(count: Int): Rand[List[Int]] =
+    sequence(List.fill(count)(int))
 
   def flatMap[A,B](f: Rand[A])(g: A => Rand[B]): Rand[B] = ???
 }
