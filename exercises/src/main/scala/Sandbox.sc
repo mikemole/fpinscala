@@ -1,4 +1,6 @@
 object Sandbox {
-  Int.MinValue                                    //> res0: Int(-2147483648) = -2147483648
-  Int.MaxValue                                    //> res1: Int(2147483647) = 2147483647
+  Int.MinValue
+  Int.MaxValue
+  
+  def map2[A,B,C](a: Par[A], b: Par[B])(f: (A,B) => C): Par[C] = ???
 }
