@@ -64,6 +64,18 @@ object Par {
     es => 
       if (run(es)(cond).get) t(es) // Notice we are blocking on the result of `cond`.
       else f(es)
+      
+  def choiceN[A](n: Par[Int])(choices: List[Par[A]]): Par[A] =
+    es => {
+      val ind: Int = run(es)(n).get
+      run(es)(choices(ind))
+    }
+    
+  def choiceViaChoiceN[A](a: Par[Boolean])(ifTrue: Par[A], ifFalse: Par[A]): Par[A] = {
+    val choices: List[Par[A]] = ifTrue :: ifFalse :: Nil
+    val al: Par[Int] = map(a)(b => if (b) 0 else 1)
+    choiceN(al)(choices)
+  }
 
   /* Gives us infix syntax for `Par`. */
   implicit def toParOps[A](p: Par[A]): ParOps[A] = new ParOps(p)
